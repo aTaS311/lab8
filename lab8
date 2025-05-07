@@ -1,0 +1,23 @@
+import math
+def f(x):
+    return x - math.tan(x)
+def bisection(a, b, tol=1e-6, max_iter=100):
+    if f(a) * f(b) >= 0:
+        print("Bu intervalda kök ola bilməz (işarə dəyişməyib).")
+        return None
+
+    iter_count = 0
+    while (b - a) / 2 > tol and iter_count < max_iter:
+        c = (a + b) / 2
+        if f(c) == 0:
+            return c  # Tam kök tapılıb
+        elif f(a) * f(c) < 0:
+            b = c
+        else:
+            a = c
+        iter_count += 1
+
+    return (a + b) / 2  # Təqribi kök
+kök = bisection(0.0, 1.5)
+if kök is not None:
+    print(f"Kök təqribən: {kök:.6f}")
